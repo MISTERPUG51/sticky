@@ -14,14 +14,13 @@ using UnityEngine.SceneManagement;
 public class UpdateChecker : MonoBehaviour
 {
     public string CurrentVersion;
-    public GameObject LatestVersionText;
-    public GameObject UpdateAvailableText;
     public string NewestVersion;
     public string CurrentArchitecture;
     public string UpdateDownloadUrl;
+    public TMP_Text checkforupdatestext;
     public void Awake()
     {
-
+        CheckForUpdates();
     }
     public void CheckForUpdates()
     {
@@ -35,6 +34,7 @@ public class UpdateChecker : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
+            checkforupdatestext.text = "Sticky was unable to check for updates. Press ALT + F4 to exit. Error details: " + www.error;
         }
         else
         {
@@ -43,12 +43,11 @@ public class UpdateChecker : MonoBehaviour
         CurrentVersion = Application.version;
         if (CurrentVersion==NewestVersion)
         {
-            LatestVersionText.SetActive(true);
-            UpdateAvailableText.SetActive(false);
+            checkforupdatestext.text = "No updates are available. Returning to main menu.";
+            Invoke("ReturnToMainMenu",2);
         } else
         {
-            UpdateAvailableText.SetActive(true);
-            LatestVersionText.SetActive(false);
+            checkforupdatestext.text = "The latest update is being downloaded.";
             UpdateDownloadUrl = "https://github.com/MISTERPUG51/sticky/raw/main/binaries/1.5.1/x64/sticky_1.5.1_setup_win64.exe";
             Debug.Log("https://github.com/MISTERPUG51/sticky/raw/main/binaries/" + NewestVersion + "/" + CurrentArchitecture + "/sticky_" + NewestVersion + "_setup_win" + CurrentArchitecture + ".exe");
             if (CultureInfo.InvariantCulture.CompareInfo.IndexOf(SystemInfo.processorType, "ARM", CompareOptions.IgnoreCase) >= 0)
@@ -78,16 +77,18 @@ public class UpdateChecker : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
+            checkforupdatestext.text = "An update is available, but it could not be downloaded. Press ALT + F4 to exit. Error details: " + www.error;
         }
         else
         {
-            FileStream fs = new FileStream(System.Environment.GetEnvironmentVariable("AppData") + "/stickyUpdaterTemp/updater.exe", FileMode.Create);
+            FileStream fs = new FileStream(System.Environment.GetEnvironmentVariable("AppData") + "/StickyUpdater.exe", FileMode.Create);
             BinaryWriter w = new BinaryWriter(fs);
             w.Write(www.downloadHandler.data);
             w.Flush();
             w.Close();
             fs.Close();
             //UnityEngine.Windows.File.WriteAllBytes(System.Environment.GetEnvironmentVariable("AppData") + "/stickyUpdaterTemp/updater.exe", www.downloadHandler.data);
+            checkforupdatestext.text = "Launching updater.";
             Invoke("StartUpdate", 3);
         }
     }
@@ -102,9 +103,12 @@ public class UpdateChecker : MonoBehaviour
     }
     public void StartUpdate()
     {
-        Application.OpenURL(System.Environment.GetEnvironmentVariable("AppData") + "/stickyUpdaterTemp/updater.exe");
+        Application.OpenURL(System.Environment.GetEnvironmentVariable("AppData") + "/StickyUpdater.exe");
         Application.Quit();
     }
 
-
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
 }

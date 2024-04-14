@@ -57,4 +57,8 @@ public class menubuttoncontrol : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void CheckUpdate()
+    {
+        SceneManager.LoadScene("Update");
+    }
 }

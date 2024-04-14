@@ -439,7 +439,6 @@ GameObject:
   - component: {fileID: 392863971}
   - component: {fileID: 392863970}
   - component: {fileID: 392863973}
-  - component: {fileID: 392863974}
   - component: {fileID: 392863975}
   m_Layer: 0
   m_Name: EventSystem
@@ -512,24 +511,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelSelectDropdown: {fileID: 2101659812}
   levelSelectWarning: {fileID: 258350814}
---- !u!114 &392863974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392863969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd3c4dad1bd073249af6629865ebd8f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentVersion: 
-  LatestVersionText: {fileID: 695424698}
-  UpdateAvailableText: {fileID: 1695386344}
-  NewestVersion: 
-  CurrentArchitecture: 
-  UpdateDownloadUrl: 
 --- !u!82 &392863975
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1938,7 +1919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Release 1.6
+  m_text: Release 1.6.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2401,9 +2382,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 392863974}
-        m_TargetAssemblyTypeName: UpdateChecker, Assembly-CSharp
-        m_MethodName: CheckForUpdates
+      - m_Target: {fileID: 392863973}
+        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_MethodName: CheckUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
