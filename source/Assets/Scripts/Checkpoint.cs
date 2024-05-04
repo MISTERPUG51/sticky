@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     public float NextLevelDelay = 1f;
     public PlayerMovement movement;
     public string NextLevel = "SampleScene";
-    public AudioSource BackgroundMusic;
+    public AudioSource MusicSource;
 
     void OnCollisionEnter (Collision collisionInfo)
     {
@@ -21,6 +21,8 @@ public class Checkpoint : MonoBehaviour
 
     void LoadNextLevel ()
     {
+        PlayerPrefs.SetFloat("MusicTime", MusicSource.time);
+        PlayerPrefs.Save();
         SceneManager.LoadScene(NextLevel);
     }
 

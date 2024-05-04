@@ -7,18 +7,7 @@ public class GameOver : MonoBehaviour
     public float RestartDelay = 1f;
     public PlayerMovement movement;
     public Rigidbody rb;
+    public AudioSource MusicSource;
 
-    void OnCollisionEnter(Collision collisionInfo)
-    {
-        if (collisionInfo.collider.tag == "Wall")
-        {
-            movement.enabled = false;
-            Invoke("Restart", RestartDelay);
-        }
-    }
-
-    void Restart ()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 }

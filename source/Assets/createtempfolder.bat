@@ -1,1 +1,0 @@
-mkdir %AppData%\Sticky
