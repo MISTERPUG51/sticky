@@ -1,4 +1,4 @@
-This software is provided "as-is". I am not responsible for any damage that may occur because of this software.
+This software is provided "as-is". I am not responsible for any damage caused by this software.
 
 # Program
 
