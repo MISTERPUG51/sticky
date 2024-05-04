@@ -1535,9 +1535,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1728235910}
+      - m_Target: {fileID: 1728235912}
         m_TargetAssemblyTypeName: UpdateChecker, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
