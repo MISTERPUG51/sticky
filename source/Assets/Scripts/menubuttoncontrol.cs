@@ -118,7 +118,7 @@ public class menubuttoncontrol : MonoBehaviour
             if (levelSelectDropdown.value == 0)
             {
                 LevelPreviewImage.sprite = level_icon_0;
-                LevelNameText.text = "[REPLACE WITH PLACEHOLDER TEXT]";
+                LevelNameText.text = "No level selected.";
             }
             else if (levelSelectDropdown.value == 1)
             {
