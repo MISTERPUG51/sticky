@@ -2,6 +2,8 @@
 
 Sticky is a small game I made. The goal of the game is to move a cube through multiple mazes without touching the walls and avoiding other obstacles. Moving the cube is done by using the W, A, S, and D keys.
 
+Currently, the game is only available for Windows PCs, but you can run it on MacOS and Linux using [WINE](https://www.winehq.org/).
+
 # Credits
 #### Music
 
