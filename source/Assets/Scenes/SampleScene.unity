@@ -1076,6 +1076,7 @@ MonoBehaviour:
   PauseMenuUI: {fileID: 0}
   PlayerMovement: {fileID: 0}
   Controls: {fileID: 0}
+  FullscreenModeDropdown: {fileID: 0}
   level_icon_2: {fileID: 21300000, guid: 5396f41003663824b8daa9ad2ce8d211, type: 3}
   level_icon_3: {fileID: 21300000, guid: 062ad1476d8080e489d591f7716104e1, type: 3}
   level_icon_4: {fileID: 21300000, guid: b3d873ee4616a0f499457b259f38983f, type: 3}
@@ -2432,7 +2433,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Release 2.0.2
+  m_text: Release 2.0.3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4051,7 +4052,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 30
   m_Viewport: {fileID: 385022283}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2090349263}

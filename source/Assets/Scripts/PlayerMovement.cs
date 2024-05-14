@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
             PlayerPrefs.SetInt("UnlockedLevels", LevelNumber);
             PlayerPrefs.Save();
         }
+        LogFPS();
     }
 
     void FixedUpdate()
@@ -96,5 +97,11 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         MovementEnabled = true;
+    }
+
+    public void LogFPS()
+    {
+        Debug.Log("FPS: " + (1f / Time.unscaledDeltaTime));
+        Invoke("LogFPS", 0.5f);
     }
 }

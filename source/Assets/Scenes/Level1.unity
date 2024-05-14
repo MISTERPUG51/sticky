@@ -1021,6 +1021,10 @@ MonoBehaviour:
   level_icon_4: {fileID: 0}
   level_icon_5: {fileID: 0}
   level_icon_6: {fileID: 0}
+  level_icon_7: {fileID: 0}
+  level_icon_8: {fileID: 0}
+  level_icon_9: {fileID: 0}
+  level_icon_10: {fileID: 0}
 --- !u!114 &392863974
 MonoBehaviour:
   m_ObjectHideFlags: 0

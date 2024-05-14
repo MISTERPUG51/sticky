@@ -25,6 +25,10 @@ public class menubuttoncontrol : MonoBehaviour
     public GameObject PauseMenuUI;
     public PlayerMovement PlayerMovement;
     public GameObject Controls;
+    public TMP_Dropdown FullscreenModeDropdown;
+
+
+    //These sprites are the level preview images on the level select screen.
     public Sprite level_icon_2;
     public Sprite level_icon_3;
     public Sprite level_icon_4;
@@ -35,26 +39,13 @@ public class menubuttoncontrol : MonoBehaviour
     public Sprite level_icon_9;
     public Sprite level_icon_10;
 
-    public void Awake()
+    public void Start()
     {
         MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1);
         levelSelectWarning.SetActive(false);
-        if (CultureInfo.InvariantCulture.CompareInfo.IndexOf(SystemInfo.processorType, "ARM", CompareOptions.IgnoreCase) >= 0)
-        {
-            if (Environment.Is64BitProcess)
-                Debug.Log("ARM64");
-            else
-                Debug.Log("ARM");
-        }
-        else
-        {
-            // Must be in the x86 family.
-            if (Environment.Is64BitProcess)
-                Debug.Log("x64");
-            else
-                Debug.Log("x86");
-        }
+        
     }
+
     public void LevelSelect()
     {
         MainMenuUI.SetActive(false);
@@ -93,6 +84,13 @@ public class menubuttoncontrol : MonoBehaviour
     public void ResetSettings()
     {
         PlayerPrefs.DeleteKey("MusicVolume");
+        SceneManager.LoadScene("Settings");
+    }
+
+    public void DeleteProgress()
+    {
+        PlayerPrefs.DeleteKey("UnlockedLevels");
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Settings");
     }
 
@@ -201,4 +199,24 @@ public class menubuttoncontrol : MonoBehaviour
     {
         Controls.SetActive(false);
     }
+
+
+
+    public void FullscreenModeDropdownUpdate()
+    {
+        if (FullscreenModeDropdown.value == 0)
+        {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+        if (FullscreenModeDropdown.value == 1)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+        if (FullscreenModeDropdown.value == 2)
+        {
+            Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+        }
+        Debug.Log(Screen.fullScreenMode);
+    }
+
 }
