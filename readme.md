@@ -9,7 +9,7 @@ Currently, the game is only available for Windows PCs, but you can run it on Mac
  - Ability to change default controls
  - More levels
  - Level editor and custom level support (maybe)
- - Support for other platforms (specifically Linux and MacOS
+ - Support for other platforms (specifically Linux and MacOS)
 
 # Credits
 #### Music
