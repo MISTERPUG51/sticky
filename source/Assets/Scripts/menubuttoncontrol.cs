@@ -16,6 +16,7 @@ public class menubuttoncontrol : MonoBehaviour
     public Slider MusicVolumeSlider;
     public GameObject MainMenuUI;
     public GameObject LevelSelectUI;
+    public GameObject OldSaveNotification;
     public Image LevelPreviewImage;
     public Sprite level_icon_0;
     public Sprite level_icon_1;
@@ -26,6 +27,7 @@ public class menubuttoncontrol : MonoBehaviour
     public PlayerMovement PlayerMovement;
     public GameObject Controls;
     public TMP_Dropdown FullscreenModeDropdown;
+    public TMP_Dropdown PlayerCubeColorDropdown;
 
 
     //These sprites are the level preview images on the level select screen.
@@ -41,9 +43,22 @@ public class menubuttoncontrol : MonoBehaviour
 
     public void Start()
     {
+        PlayerPrefs.SetInt("CurrentSaveDataVersion", 1);
+        PlayerPrefs.Save();
+        Debug.Log("SaveDataVersion=" + PlayerPrefs.GetInt("SaveDataVersion", 0));
+        Debug.Log("UnlockedLevels=" + PlayerPrefs.GetInt("UnlockedLevels", 0));
+        if (PlayerPrefs.HasKey("UnlockedLevels"))
+        {
+            Debug.Log("UnlockedLevels exists.");
+            if (!PlayerPrefs.HasKey("SaveDataVersion"))
+            {
+                Debug.Log("SaveDataVersion does not exist");
+                OldSaveNotification.SetActive(true);
+                MainMenuUI.SetActive(false);
+            }
+        }
         MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1);
-        levelSelectWarning.SetActive(false);
-        
+        PlayerCubeColorDropdown.value = PlayerPrefs.GetInt("PlayerColor");
     }
 
     public void LevelSelect()
@@ -84,12 +99,13 @@ public class menubuttoncontrol : MonoBehaviour
     public void ResetSettings()
     {
         PlayerPrefs.DeleteKey("MusicVolume");
+        PlayerPrefs.DeleteKey("PlayerColor");
         SceneManager.LoadScene("Settings");
     }
 
     public void DeleteProgress()
     {
-        PlayerPrefs.DeleteKey("UnlockedLevels");
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         SceneManager.LoadScene("Settings");
     }
@@ -131,22 +147,22 @@ public class menubuttoncontrol : MonoBehaviour
             else if (levelSelectDropdown.value == 3)
             {
                 LevelPreviewImage.sprite = level_icon_3;
-                LevelNameText.text = "Level 3: Back and Forth";
+                LevelNameText.text = "Level 3: Spiral";
             }
             else if (levelSelectDropdown.value == 4)
             {
                 LevelPreviewImage.sprite = level_icon_4;
-                LevelNameText.text = "Level 4: I can't think of a good name";
+                LevelNameText.text = "Level 4: Fiery Fun";
             }
             else if (levelSelectDropdown.value == 5)
             {
                 LevelPreviewImage.sprite = level_icon_5;
-                LevelNameText.text = "Level 5: Is it getting hot in here?";
+                LevelNameText.text = "Level 5: More fire = more fun";
             }
             else if (levelSelectDropdown.value == 6)
             {
                 LevelPreviewImage.sprite = level_icon_6;
-                LevelNameText.text = "Level 6: More fire = more fun";
+                LevelNameText.text = "Level 6: rock";
             }
             else if (levelSelectDropdown.value == 7)
             {
@@ -217,6 +233,23 @@ public class menubuttoncontrol : MonoBehaviour
             Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
         }
         Debug.Log(Screen.fullScreenMode);
+    }
+
+    public void OldSaveOKButton()
+    {
+        PlayerPrefs.DeleteKey("UnlockedLevels");
+        PlayerPrefs.SetInt("SaveDataVersion", PlayerPrefs.GetInt("CurrentSaveDataVersion"));
+        PlayerPrefs.Save();
+        OldSaveNotification.SetActive(false);
+        MainMenuUI.SetActive(true);
+    }
+
+    public void PlayerCubeColorChanged()
+    {
+        
+        PlayerPrefs.SetInt("PlayerColor", PlayerCubeColorDropdown.value);
+        PlayerPrefs.Save();
+        Debug.Log("color=" + PlayerPrefs.GetInt("PlayerColor"));
     }
 
 }
