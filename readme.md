@@ -7,7 +7,7 @@ Currently, the game is only available for Windows PCs, but you can run it on Mac
 # Planned features
 
  - Ability to change default controls
- - More levels
+ - Complete redesign of levels
  - Level editor and custom level support (maybe)
  - Support for other platforms (specifically Linux and MacOS)
 
