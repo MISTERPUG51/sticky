@@ -9,6 +9,9 @@ Currently, the game is only available for Windows PCs, but you can run it on Mac
  - Ability to change default controls
  - Level editor and custom level support (maybe)
  - Support for other platforms (specifically Linux and MacOS)
+ - Ability to view changelogs in-game
+ - More levels
+ - Move save data into a file (save data is currently stored using Unity PlayerPrefs)
 
 # Credits
 #### Music
