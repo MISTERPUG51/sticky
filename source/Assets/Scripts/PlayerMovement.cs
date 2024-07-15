@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements.Experimental;
@@ -28,63 +29,103 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
+
+    public int UnlockedLevels;
+    public int PlayerColor;
+    public int SaveDataVersion;
+    public float MusicVolume;
+
+
+    [Serializable]
+    public class JsonSaveDataClass
+    {
+        public int SaveDataVersion;
+        public int PlayerColor;
+        public int UnlockedLevels;
+        public float MusicVolume;
+    }
+
+    public void LoadData()
+    {
+        string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/save.json");
+        JsonSaveDataClass SaveData = JsonUtility.FromJson<JsonSaveDataClass>(json);
+        SaveDataVersion = SaveData.SaveDataVersion;
+        PlayerColor = SaveData.PlayerColor;
+        UnlockedLevels = SaveData.UnlockedLevels;
+        MusicVolume = SaveData.MusicVolume;
+    }
+    public void SaveData()
+    {
+        JsonSaveDataClass SaveData = new JsonSaveDataClass
+        {
+            SaveDataVersion = SaveDataVersion,
+            PlayerColor = PlayerColor,
+            UnlockedLevels = UnlockedLevels,
+            MusicVolume = MusicVolume
+        };
+        string json = JsonUtility.ToJson(SaveData);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/save.json", json);
+    }
+
+
+
+
+
     private void Awake()
     {
+        LoadData();
         PlayerPrefs.Save();
-        if (LevelNumber > PlayerPrefs.GetInt("UnlockedLevels", 0))
+        if (LevelNumber > UnlockedLevels)
         {
             Debug.Log("unlocked new level");
-            PlayerPrefs.SetInt("SaveDataVersion", PlayerPrefs.GetInt("CurrentSaveDataVersion"));
-            PlayerPrefs.SetInt("UnlockedLevels", LevelNumber);
-            PlayerPrefs.Save();
+            UnlockedLevels = LevelNumber;
+            SaveData();
         }
-        if (PlayerPrefs.HasKey("PlayerColor"))
-        {
-            if (PlayerPrefs.GetInt("PlayerColor") == 1)
+            if (PlayerColor == 1)
             {
                 playerRenderer.material = material1;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 2)
+            if (PlayerColor == 2)
             {
                 playerRenderer.material = material2;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 3)
+            if (PlayerColor == 3)
             {
                 playerRenderer.material = material3;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 4)
+            if (PlayerColor == 4)
             {
                 playerRenderer.material = material4;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 5)
+            if (PlayerColor == 5)
             {
                 playerRenderer.material = material5;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 6)
+            if (PlayerColor == 6)
             {
                 playerRenderer.material = material6;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 7)
+            if (PlayerColor == 7)
             {
                 playerRenderer.material = material7;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 8)
+            if (PlayerColor == 8)
             {
                 playerRenderer.material = material8;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 9)
+            if (PlayerColor == 9)
             {
                 playerRenderer.material = material9;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 10)
+            if (PlayerColor == 10)
             {
                 playerRenderer.material = material10;
             }
-            if (PlayerPrefs.GetInt("PlayerColor") == 11)
+            if (PlayerColor == 11)
             {
                 playerRenderer.material = material11;
             }
-        }
         LogFPS();
     }
 

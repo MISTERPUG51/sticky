@@ -9,11 +9,11 @@ using System;
 
 
 
+
 public class menubuttoncontrol : MonoBehaviour
 {
     public TMP_Dropdown levelSelectDropdown;
     public GameObject levelSelectWarning;
-    public Slider MusicVolumeSlider;
     public GameObject MainMenuUI;
     public GameObject LevelSelectUI;
     public GameObject OldSaveNotification;
@@ -26,8 +26,11 @@ public class menubuttoncontrol : MonoBehaviour
     public GameObject PauseMenuUI;
     public PlayerMovement PlayerMovement;
     public GameObject Controls;
-    public TMP_Dropdown FullscreenModeDropdown;
-    public TMP_Dropdown PlayerCubeColorDropdown;
+
+    public int UnlockedLevels;
+    public int PlayerColor;
+    public int SaveDataVersion;
+    public float MusicVolume;
 
 
     //These sprites are the level preview images on the level select screen.
@@ -41,26 +44,80 @@ public class menubuttoncontrol : MonoBehaviour
     public Sprite level_icon_9;
     public Sprite level_icon_10;
 
+
+
+    [Serializable]
+    public class JsonSaveDataClass
+    {
+        public int SaveDataVersion;
+        public int PlayerColor;
+        public int UnlockedLevels;
+        public float MusicVolume;
+    }
     public void Start()
     {
-        PlayerPrefs.SetInt("CurrentSaveDataVersion", 1);
-        PlayerPrefs.Save();
-        Debug.Log("SaveDataVersion=" + PlayerPrefs.GetInt("SaveDataVersion", 0));
-        Debug.Log("UnlockedLevels=" + PlayerPrefs.GetInt("UnlockedLevels", 0));
-        if (PlayerPrefs.HasKey("UnlockedLevels"))
+        Debug.Log(Application.persistentDataPath);
+        Debug.Log(Application.persistentDataPath + "/save.json");
+        //PlayerPrefs.SetInt("CurrentSaveDataVersion", 1);
+        //PlayerPrefs.Save();
+        //Debug.Log("SaveDataVersion=" + PlayerPrefs.GetInt("SaveDataVersion", 0));
+        //Debug.Log("UnlockedLevels=" + PlayerPrefs.GetInt("UnlockedLevels", 0));
+        //Check to see if there is any save data in the old PlayerPrefs format.
+        //If there is, the game checks to see if the PlayerPrefs save data has the "SaveDataVersion" key.
+        //If there is not PlayerPrefs save data, the game checks if there is savedata in the JSON format.
+        //if (PlayerPrefs.HasKey("UnlockedLevels"))
+        //{
+        //    Debug.Log("UnlockedLevels exists.");
+            //Checks to see if the PlayerPrefs save data has the "SaveDataVersion" key.
+            //If it does not, that means that the save data is from a version prior to the level redesign (release 2.1) and the data must be reset.
+            //If it does, the save data will be converted to JSON and the PlayerPrefs save data keys will be deleted.
+            //if (!PlayerPrefs.HasKey("SaveDataVersion"))
+            //{
+            //    Debug.Log("SaveDataVersion does not exist");
+            //    OldSaveNotification.SetActive(true);
+            //    MainMenuUI.SetActive(false);
+            //} else
+            //{
+            //    ConvertPlayerPrefsSaveDataToJson();
+            //}
+        //} else
+        //{
+            //Checks to see if there is save data in the JSON format.
+            //If there is, nothing happens.
+            //If there is not, the game creates a new JSON save data file.
+        if (!System.IO.File.Exists(Application.persistentDataPath + "/save.json"))
         {
-            Debug.Log("UnlockedLevels exists.");
-            if (!PlayerPrefs.HasKey("SaveDataVersion"))
-            {
-                Debug.Log("SaveDataVersion does not exist");
-                OldSaveNotification.SetActive(true);
-                MainMenuUI.SetActive(false);
-            }
+            UnlockedLevels = 1;
+            PlayerColor = 1;
+            SaveDataVersion = 2;
+            MusicVolume = 1f;
+            SaveData();
         }
-        MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1);
-        PlayerCubeColorDropdown.value = PlayerPrefs.GetInt("PlayerColor");
+        LoadData();
+        //}
     }
 
+    public void LoadData()
+    {
+        string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/save.json");
+        JsonSaveDataClass SaveData = JsonUtility.FromJson<JsonSaveDataClass>(json);
+        SaveDataVersion = SaveData.SaveDataVersion;
+        PlayerColor = SaveData.PlayerColor;
+        UnlockedLevels = SaveData.UnlockedLevels;
+        MusicVolume = SaveData.MusicVolume;
+    }
+    public void SaveData()
+    {
+        JsonSaveDataClass SaveData = new JsonSaveDataClass
+        {
+            SaveDataVersion = SaveDataVersion,
+            PlayerColor = PlayerColor,
+            UnlockedLevels = UnlockedLevels,
+            MusicVolume = MusicVolume
+        };
+        string json = JsonUtility.ToJson(SaveData);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/save.json", json);
+    }
     public void LevelSelect()
     {
         MainMenuUI.SetActive(false);
@@ -81,39 +138,14 @@ public class menubuttoncontrol : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
-    public void CheckUpdate()
-    {
-        SceneManager.LoadScene("Update");
-    }
 
     public void Settings()
     {
         SceneManager.LoadScene("Settings");
     }
 
-    public void ChangeMusicVolume()
-    {
-        PlayerPrefs.SetFloat("MusicVolume", MusicVolumeSlider.value);
-        PlayerPrefs.Save();
-    }
-    public void ResetSettings()
-    {
-        PlayerPrefs.DeleteKey("MusicVolume");
-        PlayerPrefs.DeleteKey("PlayerColor");
-        SceneManager.LoadScene("Settings");
-    }
-
-    public void DeleteProgress()
-    {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("Settings");
-    }
-
-    public void VisitWebsite()
-    {
-        Application.OpenURL("https://misterpug51.github.io/programs/sticky/");
-    }
+    
+    
 
     public void MainMenuInSampleScene()
     {
@@ -123,7 +155,7 @@ public class menubuttoncontrol : MonoBehaviour
 
     public void LevelSelectionChanged()
     {
-        if (levelSelectDropdown.value > PlayerPrefs.GetInt("UnlockedLevels",1))
+        if (levelSelectDropdown.value > UnlockedLevels)
         {
             LevelPreviewImage.sprite = level_icon_locked;
             LevelNameText.text = "Locked";
@@ -191,7 +223,7 @@ public class menubuttoncontrol : MonoBehaviour
     {
         if (levelSelectDropdown.value != 0)
         {
-            if (levelSelectDropdown.value <= PlayerPrefs.GetInt("UnlockedLevels", 1))
+            if (levelSelectDropdown.value <= UnlockedLevels)
             {
                 SceneManager.LoadScene("Level" + levelSelectDropdown.value);
             } else
@@ -216,25 +248,6 @@ public class menubuttoncontrol : MonoBehaviour
         Controls.SetActive(false);
     }
 
-
-
-    public void FullscreenModeDropdownUpdate()
-    {
-        if (FullscreenModeDropdown.value == 0)
-        {
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-        }
-        if (FullscreenModeDropdown.value == 1)
-        {
-            Screen.fullScreenMode = FullScreenMode.Windowed;
-        }
-        if (FullscreenModeDropdown.value == 2)
-        {
-            Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
-        }
-        Debug.Log(Screen.fullScreenMode);
-    }
-
     public void OldSaveOKButton()
     {
         PlayerPrefs.DeleteKey("UnlockedLevels");
@@ -244,12 +257,5 @@ public class menubuttoncontrol : MonoBehaviour
         MainMenuUI.SetActive(true);
     }
 
-    public void PlayerCubeColorChanged()
-    {
-        
-        PlayerPrefs.SetInt("PlayerColor", PlayerCubeColorDropdown.value);
-        PlayerPrefs.Save();
-        Debug.Log("color=" + PlayerPrefs.GetInt("PlayerColor"));
-    }
-
+    
 }

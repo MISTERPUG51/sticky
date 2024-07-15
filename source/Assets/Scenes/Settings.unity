@@ -474,7 +474,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 442480811}
-        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_TargetAssemblyTypeName: settings, Assembly-CSharp
         m_MethodName: ResetSettings
         m_Mode: 1
         m_Arguments:
@@ -1004,7 +1004,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 442480811}
-        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_TargetAssemblyTypeName: settings, Assembly-CSharp
         m_MethodName: CheckUpdate
         m_Mode: 1
         m_Arguments:
@@ -1131,35 +1131,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 442480807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718ba00601ead6341879d82b409a2b1c, type: 3}
+  m_Script: {fileID: 11500000, guid: dc6e77f958ae7ee44b8d61230019cda1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSelectDropdown: {fileID: 0}
-  levelSelectWarning: {fileID: 0}
-  MusicVolumeSlider: {fileID: 2125320005}
-  MainMenuUI: {fileID: 0}
-  LevelSelectUI: {fileID: 0}
-  OldSaveNotification: {fileID: 0}
-  LevelPreviewImage: {fileID: 0}
-  level_icon_0: {fileID: 0}
-  level_icon_1: {fileID: 0}
-  LevelNameText: {fileID: 0}
-  level_icon_locked: {fileID: 0}
-  BuzzAudioSource: {fileID: 0}
-  PauseMenuUI: {fileID: 0}
-  PlayerMovement: {fileID: 0}
-  Controls: {fileID: 0}
-  FullscreenModeDropdown: {fileID: 0}
   PlayerCubeColorDropdown: {fileID: 1723217956}
-  level_icon_2: {fileID: 0}
-  level_icon_3: {fileID: 0}
-  level_icon_4: {fileID: 0}
-  level_icon_5: {fileID: 0}
-  level_icon_6: {fileID: 0}
-  level_icon_7: {fileID: 0}
-  level_icon_8: {fileID: 0}
-  level_icon_9: {fileID: 0}
-  level_icon_10: {fileID: 0}
+  MusicVolumeSlider: {fileID: 2125320005}
+  UnlockedLevels: 0
+  PlayerColor: 0
+  SaveDataVersion: 0
+  MusicVolume: 0
 --- !u!1 &466498748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1299,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 442480811}
-        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_TargetAssemblyTypeName: settings, Assembly-CSharp
         m_MethodName: DeleteProgress
         m_Mode: 1
         m_Arguments:
@@ -2334,7 +2314,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 442480811}
-        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_TargetAssemblyTypeName: settings, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -3064,7 +3044,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 442480811}
-        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_TargetAssemblyTypeName: settings, Assembly-CSharp
         m_MethodName: PlayerCubeColorChanged
         m_Mode: 1
         m_Arguments:
@@ -3606,7 +3586,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 442480811}
-        m_TargetAssemblyTypeName: menubuttoncontrol, Assembly-CSharp
+        m_TargetAssemblyTypeName: settings, Assembly-CSharp
         m_MethodName: ChangeMusicVolume
         m_Mode: 1
         m_Arguments:

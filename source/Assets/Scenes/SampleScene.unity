@@ -1196,7 +1196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelSelectDropdown: {fileID: 1074833022}
   levelSelectWarning: {fileID: 258350814}
-  MusicVolumeSlider: {fileID: 0}
   MainMenuUI: {fileID: 1062537184}
   LevelSelectUI: {fileID: 621106241}
   OldSaveNotification: {fileID: 2000146304}
@@ -1209,8 +1208,10 @@ MonoBehaviour:
   PauseMenuUI: {fileID: 0}
   PlayerMovement: {fileID: 0}
   Controls: {fileID: 0}
-  FullscreenModeDropdown: {fileID: 0}
-  PlayerCubeColorDropdown: {fileID: 0}
+  UnlockedLevels: 0
+  PlayerColor: 0
+  SaveDataVersion: 0
+  MusicVolume: 0
   level_icon_2: {fileID: 21300000, guid: 2bb36cafc1df674488be8a58b099db77, type: 3}
   level_icon_3: {fileID: 21300000, guid: 88ca9aecabfef2d49b9037b59677135c, type: 3}
   level_icon_4: {fileID: 21300000, guid: 19f1b01eacd207e4abf2549fd64a3fe0, type: 3}
@@ -1329,6 +1330,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicSource: {fileID: 392863975}
+  UnlockedLevels: 0
+  PlayerColor: 0
+  SaveDataVersion: 0
+  MusicVolume: 0
 --- !u!1 &410851042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Release 2.1
+  m_text: Release 2.1.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
