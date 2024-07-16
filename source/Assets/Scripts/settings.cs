@@ -68,16 +68,16 @@ public class settings : MonoBehaviour
 
     public void ResetSettings()
     {
-        PlayerPrefs.DeleteKey("MusicVolume");
-        PlayerPrefs.DeleteKey("PlayerColor");
+        MusicVolume = 1f;
+        PlayerColor = 1;
+        SaveData();
         SceneManager.LoadScene("Settings");
     }
 
     public void DeleteProgress()
     {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("Settings");
+        System.IO.File.Delete(Application.persistentDataPath + "/save.json");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void PlayerCubeColorChanged()
