@@ -12,6 +12,7 @@ Currently, the game is only available for Windows PCs, but you can run it on Mac
  - Ability to view changelogs in-game
  - More levels
  - Automatic update checker
+ - In-game feedback button
 
 # Credits
 #### Music
