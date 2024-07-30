@@ -13,7 +13,6 @@ Currently, the game is only available for Windows PCs, but you can run it on Mac
  - Add more levels
  - Add automatic update checker
  - Add In-game feedback button
- - Switch to Unreal Engine (Most likely won't happen because that will require rewriting the game from the ground up.)
 
 # Credits
 #### Music
