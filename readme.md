@@ -4,15 +4,16 @@ Sticky is a small game I made. The goal of the game is to move a cube through mu
 
 Currently, the game is only available for Windows PCs, but you can run it on MacOS and Linux using [WINE](https://www.winehq.org/).
 
-# Planned features
+# Planned changes
 
- - Ability to change default controls
- - Level editor and custom level support (maybe)
- - Support for other platforms (specifically Linux and MacOS)
- - Ability to view changelogs in-game
- - More levels
- - Automatic update checker
- - In-game feedback button
+ - Add ability to change default controls
+ - Add level editor and custom level support (maybe)
+ - Add support for other platforms (specifically Linux and MacOS)
+ - Add ability to view changelogs in-game
+ - Add more levels
+ - Add automatic update checker
+ - Add In-game feedback button
+ - Switch to Unreal Engine (Most likely won't happen because that will require rewriting the game from the ground up.)
 
 # Credits
 #### Music
