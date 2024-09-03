@@ -12,7 +12,6 @@ Currently, the game is only available for Windows and Linux, but you can try to 
  - Add ability to view changelogs in-game
  - Add more levels
  - Add automatic update checker
- - Add In-game feedback button
 
 # Credits
 #### Music
