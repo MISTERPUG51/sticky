@@ -31,42 +31,10 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public int UnlockedLevels;
-    public int PlayerColor;
-    public int SaveDataVersion;
-    public float MusicVolume;
+    public SaveHandler SaveHandler;
 
 
-    [Serializable]
-    public class JsonSaveDataClass
-    {
-        public int SaveDataVersion;
-        public int PlayerColor;
-        public int UnlockedLevels;
-        public float MusicVolume;
-    }
-
-    public void LoadData()
-    {
-        string json = System.IO.File.ReadAllText(Application.persistentDataPath + "/save.json");
-        JsonSaveDataClass SaveData = JsonUtility.FromJson<JsonSaveDataClass>(json);
-        SaveDataVersion = SaveData.SaveDataVersion;
-        PlayerColor = SaveData.PlayerColor;
-        UnlockedLevels = SaveData.UnlockedLevels;
-        MusicVolume = SaveData.MusicVolume;
-    }
-    public void SaveData()
-    {
-        JsonSaveDataClass SaveData = new JsonSaveDataClass
-        {
-            SaveDataVersion = SaveDataVersion,
-            PlayerColor = PlayerColor,
-            UnlockedLevels = UnlockedLevels,
-            MusicVolume = MusicVolume
-        };
-        string json = JsonUtility.ToJson(SaveData);
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/save.json", json);
-    }
+    
 
 
 
@@ -74,55 +42,55 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        LoadData();
+        SaveHandler.LoadData();
         PlayerPrefs.Save();
-        if (LevelNumber > UnlockedLevels)
+        if (LevelNumber > SaveHandler.UnlockedLevels)
         {
             Debug.Log("unlocked new level");
-            UnlockedLevels = LevelNumber;
-            SaveData();
+            SaveHandler.UnlockedLevels = LevelNumber;
+            SaveHandler.SaveData();
         }
-            if (PlayerColor == 1)
+            if (SaveHandler.PlayerColor == 1)
             {
                 playerRenderer.material = material1;
             }
-            if (PlayerColor == 2)
+            if (SaveHandler.PlayerColor == 2)
             {
                 playerRenderer.material = material2;
             }
-            if (PlayerColor == 3)
+            if (SaveHandler.PlayerColor == 3)
             {
                 playerRenderer.material = material3;
             }
-            if (PlayerColor == 4)
+            if (SaveHandler.PlayerColor == 4)
             {
                 playerRenderer.material = material4;
             }
-            if (PlayerColor == 5)
+            if (SaveHandler.PlayerColor == 5)
             {
                 playerRenderer.material = material5;
             }
-            if (PlayerColor == 6)
+            if (SaveHandler.PlayerColor == 6)
             {
                 playerRenderer.material = material6;
             }
-            if (PlayerColor == 7)
+            if (SaveHandler.PlayerColor == 7)
             {
                 playerRenderer.material = material7;
             }
-            if (PlayerColor == 8)
+            if (SaveHandler.PlayerColor == 8)
             {
                 playerRenderer.material = material8;
             }
-            if (PlayerColor == 9)
+            if (SaveHandler.PlayerColor == 9)
             {
                 playerRenderer.material = material9;
             }
-            if (PlayerColor == 10)
+            if (SaveHandler.PlayerColor == 10)
             {
                 playerRenderer.material = material10;
             }
-            if (PlayerColor == 11)
+            if (SaveHandler.PlayerColor == 11)
             {
                 playerRenderer.material = material11;
             }

@@ -394,6 +394,7 @@ MonoBehaviour:
   material9: {fileID: 2100000, guid: 580692d82ab87aa4eb4f9577ae127519, type: 2}
   material10: {fileID: 2100000, guid: 3bf38e81c19078c45aa1c26a043a2d70, type: 2}
   material11: {fileID: 2100000, guid: cbdbb80ecefcca746b470bc97c9cbd41, type: 2}
+  SaveHandler: {fileID: 392863975}
 --- !u!114 &163722937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +526,7 @@ GameObject:
   - component: {fileID: 392863970}
   - component: {fileID: 392863973}
   - component: {fileID: 392863974}
+  - component: {fileID: 392863975}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -596,7 +598,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelSelectDropdown: {fileID: 0}
   levelSelectWarning: {fileID: 0}
-  MusicVolumeSlider: {fileID: 0}
   MainMenuUI: {fileID: 0}
   LevelSelectUI: {fileID: 0}
   OldSaveNotification: {fileID: 0}
@@ -609,7 +610,6 @@ MonoBehaviour:
   PauseMenuUI: {fileID: 1746374378}
   PlayerMovement: {fileID: 163722934}
   Controls: {fileID: 0}
-  FullscreenModeDropdown: {fileID: 0}
   level_icon_2: {fileID: 0}
   level_icon_3: {fileID: 0}
   level_icon_4: {fileID: 0}
@@ -619,6 +619,7 @@ MonoBehaviour:
   level_icon_8: {fileID: 0}
   level_icon_9: {fileID: 0}
   level_icon_10: {fileID: 0}
+  SaveHandler: {fileID: 392863975}
 --- !u!114 &392863974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +634,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelText: {fileID: 557858283}
   LevelTextDisableDelay: 2
+--- !u!114 &392863975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392863969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef676a9928e998243b56d96a9378100e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnlockedLevels: 0
+  PlayerColor: 0
+  SaveDataVersion: 0
+  MusicVolume: 0
 --- !u!1 &557858283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3274133151065309921, guid: 3a46073ed32c0b941a8ede2fba746bd3, type: 3}
@@ -1131,6 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicSource: {fileID: 1096025823}
+  SaveHandler: {fileID: 392863975}
 --- !u!1001 &1338519723
 PrefabInstance:
   m_ObjectHideFlags: 0

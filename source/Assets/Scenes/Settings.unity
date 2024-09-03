@@ -1065,6 +1065,7 @@ GameObject:
   - component: {fileID: 442480809}
   - component: {fileID: 442480808}
   - component: {fileID: 442480811}
+  - component: {fileID: 442480812}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1136,6 +1137,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCubeColorDropdown: {fileID: 1723217956}
   MusicVolumeSlider: {fileID: 2125320005}
+  SaveHandler: {fileID: 442480812}
+--- !u!114 &442480812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442480807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef676a9928e998243b56d96a9378100e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   UnlockedLevels: 0
   PlayerColor: 0
   SaveDataVersion: 0
