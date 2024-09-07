@@ -16,6 +16,7 @@ public class menubuttoncontrol : MonoBehaviour
     public GameObject levelSelectWarning;
     public GameObject MainMenuUI;
     public GameObject LevelSelectUI;
+    public GameObject SaveDataMenuUI;
     public GameObject OldSaveNotification;
     public Image LevelPreviewImage;
     public Sprite level_icon_0;
@@ -23,9 +24,14 @@ public class menubuttoncontrol : MonoBehaviour
     public TMP_Text LevelNameText;
     public Sprite level_icon_locked;
     public AudioSource BuzzAudioSource;
-    public GameObject PauseMenuUI;
-    public PlayerMovement PlayerMovement;
-    public GameObject Controls;
+
+    public TMP_Text SaveFileCreationTimeText;
+    public TMP_Text UnlockedLevelsText;
+    public TMP_Dropdown LevelTimeDropdown;
+    public TMP_Text LevelTimeText;
+
+    public GameObject DeleteDataMenuUI;
+
 
 
     //These sprites are the level preview images on the level select screen.
@@ -45,43 +51,16 @@ public class menubuttoncontrol : MonoBehaviour
     {
         Debug.Log(Application.persistentDataPath);
         Debug.Log(Application.persistentDataPath + "/save.json");
-        //PlayerPrefs.SetInt("CurrentSaveDataVersion", 1);
-        //PlayerPrefs.Save();
-        //Debug.Log("SaveDataVersion=" + PlayerPrefs.GetInt("SaveDataVersion", 0));
-        //Debug.Log("UnlockedLevels=" + PlayerPrefs.GetInt("UnlockedLevels", 0));
-        //Check to see if there is any save data in the old PlayerPrefs format.
-        //If there is, the game checks to see if the PlayerPrefs save data has the "SaveDataVersion" key.
-        //If there is not PlayerPrefs save data, the game checks if there is savedata in the JSON format.
-        //if (PlayerPrefs.HasKey("UnlockedLevels"))
-        //{
-        //    Debug.Log("UnlockedLevels exists.");
-            //Checks to see if the PlayerPrefs save data has the "SaveDataVersion" key.
-            //If it does not, that means that the save data is from a version prior to the level redesign (release 2.1) and the data must be reset.
-            //If it does, the save data will be converted to JSON and the PlayerPrefs save data keys will be deleted.
-            //if (!PlayerPrefs.HasKey("SaveDataVersion"))
-            //{
-            //    Debug.Log("SaveDataVersion does not exist");
-            //    OldSaveNotification.SetActive(true);
-            //    MainMenuUI.SetActive(false);
-            //} else
-            //{
-            //    ConvertPlayerPrefsSaveDataToJson();
-            //}
-        //} else
-        //{
-            //Checks to see if there is save data in the JSON format.
-            //If there is, nothing happens.
-            //If there is not, the game creates a new JSON save data file.
+
+        //Creates a save file if it does not already exist.
         if (!System.IO.File.Exists(Application.persistentDataPath + "/save.json"))
         {
-            SaveHandler.UnlockedLevels = 1;
-            SaveHandler.PlayerColor = 1;
-            SaveHandler.SaveDataVersion = 2;
-            SaveHandler.MusicVolume = 1f;
+            SaveHandler.SaveDataVersion = 0;
             SaveHandler.SaveData();
         }
+        SaveHandler.UpdateSaveData();
         SaveHandler.LoadData();
-        //}
+        Debug.Log(System.DateTime.Now);
     }
     public void LevelSelect()
     {
@@ -114,18 +93,20 @@ public class menubuttoncontrol : MonoBehaviour
 
     public void MainMenuInSampleScene()
     {
+        SaveDataMenuUI.SetActive(false);
         LevelSelectUI.SetActive(false);
         MainMenuUI.SetActive(true);
     }
 
     public void LevelSelectionChanged()
     {
+        //If the selected level is locked, show the padlock level icon.
+        //If the selected level is unlocked, show the corresponding icon.
         if (levelSelectDropdown.value > SaveHandler.UnlockedLevels)
         {
             LevelPreviewImage.sprite = level_icon_locked;
             LevelNameText.text = "Locked";
-        } else
-        {
+        } else {
             if (levelSelectDropdown.value == 0)
             {
                 LevelPreviewImage.sprite = level_icon_0;
@@ -186,6 +167,8 @@ public class menubuttoncontrol : MonoBehaviour
 
     public void StartGame()
     {
+        //If the selected level is unlocked, load the scene for that level.
+        //If the selected level is locked, play a buzz sound.
         if (levelSelectDropdown.value != 0)
         {
             if (levelSelectDropdown.value <= SaveHandler.UnlockedLevels)
@@ -196,21 +179,6 @@ public class menubuttoncontrol : MonoBehaviour
                 BuzzAudioSource.Play();
             }
         }
-    }
-
-    public void PauseGame()
-    {
-        PauseMenuUI.SetActive(true);
-    }
-    public void UnpauseGame()
-    {
-        PauseMenuUI.SetActive(false);
-        PlayerMovement.ResumeGame();
-    }
-
-    public void HideControls()
-    {
-        Controls.SetActive(false);
     }
 
     public void OldSaveOKButton()
@@ -225,5 +193,74 @@ public class menubuttoncontrol : MonoBehaviour
     public void FeedBackButton()
     {
         Application.OpenURL("https://github.com/MISTERPUG51/sticky/issues/new");
+    }
+
+    public void SaveDataMenu()
+    {
+        DeleteDataMenuUI.SetActive(false);
+        MainMenuUI.SetActive(false);
+        SaveDataMenuUI.SetActive(true);
+        SaveFileCreationTimeText.text = "Save file created: " + SaveHandler.CreatedDate;
+        UnlockedLevelsText.text = "Unlocked levels: " + SaveHandler.UnlockedLevels;
+    }
+
+    public void DeleteDataMenu()
+    {
+        SaveDataMenuUI.SetActive(false);
+        DeleteDataMenuUI.SetActive(true);
+    }
+
+    public void DeleteData()
+    {
+        System.IO.File.Delete(Application.persistentDataPath + "/save.json");
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void LevelTimeDropdownChanged()
+    {
+        if (LevelTimeDropdown.value == 0)
+        {
+            LevelTimeText.text = "Select a level to see your best time.";
+        }
+        if (LevelTimeDropdown.value == 1)
+        {
+            TimeSpan t = TimeSpan.FromMilliseconds(SaveHandler.Level1Time);
+            string GameStopWatchTimeFormattedToText = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds);
+            LevelTimeText.text = GameStopWatchTimeFormattedToText;
+        }
+        if (LevelTimeDropdown.value == 2)
+        {
+            TimeSpan t = TimeSpan.FromMilliseconds(SaveHandler.Level2Time);
+            string GameStopWatchTimeFormattedToText = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds);
+            LevelTimeText.text = GameStopWatchTimeFormattedToText;
+        }
+        if (LevelTimeDropdown.value == 3)
+        {
+            TimeSpan t = TimeSpan.FromMilliseconds(SaveHandler.Level3Time);
+            string GameStopWatchTimeFormattedToText = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds);
+            LevelTimeText.text = GameStopWatchTimeFormattedToText;
+        }
+        if (LevelTimeDropdown.value == 4)
+        {
+            TimeSpan t = TimeSpan.FromMilliseconds(SaveHandler.Level4Time);
+            string GameStopWatchTimeFormattedToText = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds);
+            LevelTimeText.text = GameStopWatchTimeFormattedToText;
+        }
+        if (LevelTimeDropdown.value == 5)
+        {
+            TimeSpan t = TimeSpan.FromMilliseconds(SaveHandler.Level5Time);
+            string GameStopWatchTimeFormattedToText = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds);
+            LevelTimeText.text = GameStopWatchTimeFormattedToText;
+        }
+        if (LevelTimeDropdown.value == 6)
+        {
+            TimeSpan t = TimeSpan.FromMilliseconds(SaveHandler.Level6Time);
+            string GameStopWatchTimeFormattedToText = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds);
+            LevelTimeText.text = GameStopWatchTimeFormattedToText;
+        }
+        if (LevelTimeText.text == "00:00:00:000")
+        {
+            LevelTimeText.text = "Not set";
+        }
     }
 }

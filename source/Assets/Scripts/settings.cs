@@ -18,6 +18,7 @@ public class settings : MonoBehaviour
     {
         SaveHandler.LoadData();
         MusicVolumeSlider.value = SaveHandler.MusicVolume;
+        PlayerCubeColorDropdown.value = SaveHandler.PlayerColor;
     }
     public void MainMenu()
     {
@@ -38,17 +39,9 @@ public class settings : MonoBehaviour
         SceneManager.LoadScene("Settings");
     }
 
-    public void DeleteProgress()
-    {
-        System.IO.File.Delete(Application.persistentDataPath + "/save.json");
-        SceneManager.LoadScene("SampleScene");
-    }
-
     public void PlayerCubeColorChanged()
     {
-
-        PlayerPrefs.SetInt("PlayerColor", PlayerCubeColorDropdown.value);
-        PlayerPrefs.Save();
+        SaveHandler.PlayerColor = PlayerCubeColorDropdown.value;
         Debug.Log("color=" + PlayerPrefs.GetInt("PlayerColor"));
     }
 

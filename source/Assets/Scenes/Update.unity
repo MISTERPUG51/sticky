@@ -1294,25 +1294,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb87846e43a704469d9be7ef4faa09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Source: 'Version 2.1.4 of Sticky
-
-
-
-    # Changes
-
-    - Changed scripting backend
-    back to IL2CPP
-
-    - Changed main menu background video codec from h.264 to
-    VP8 so that the video now plays on Linux.
-
-
-
-    ## If you are running Linux:
-
-    Make
-    sure you set the executable flag before trying to run the game. Instructions
-    on how to do this are in a README.txt file included in the zip archive.'
+  _Source: "Version 2.2 of Sticky\r\n## Changes\r\n### Levels\r\n - Made level 5
+    slightly easier.\r\n - Fixed a few improperly placed objects in level 6.\r\n###
+    New Features\r\n - Added in-game stopwatch.\r\n - Added save data menu (accessed
+    through button on main menu).\r\n - Save file now contains the time you started
+    playing (resets if you delete save data).\r\n### Bugfixes\r\n - Removed the \"[placeholder]\"
+    option in the dropdown for selecting your player cube color.\r\n - Fixed player
+    cube color setting (idk how long it didn't work, but it works now).\r\n - Fixed
+    painfully slow scrolling in the dropdown for player cube color.\r\n### Other
+    changes\r\n - Cleaned up some spaghetti code and wrote even more spaghetti code.\r\n
+    - Changed scripting backend to Mono.\r\n - Moved the reset progress button from
+    the settings menu to the save data menu.\r\n - Added confirmation when deleting
+    save data.\r\n - Changed the \"Feedback\" button on the main menu to \"Report
+    a problem\"."
   RenderSettings:
     Bold:
       RenderBold: 1
@@ -1390,13 +1384,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Version 2.1.4 of Sticky\r\n\r\n\r\n<u><b><size=2em>Changes</size></b></u>\n<size=0.45em>\u200B</size>\r\n<size=0.76em>\u200B</size>\n<line-height=0%><width=100><align=right>\u2022</width></align>\n</line-height><indent=120>Changed
-    scripting backend back to IL2CPP</indent>\r\n<line-height=0%><width=100><align=right>\u2022</width></align>\n</line-height><indent=120>Changed
-    main menu background video codec from h.264 to VP8 so that the video now plays
-    on Linux.</indent>\n<size=0.76em>\u200B</size>\r\n<u><b><size=1.7em>If you are
-    running Linux:</size></b></u>\n<size=0.3em>\u200B</size>\r\nMake sure you set
-    the executable flag before trying to run the game. Instructions on how to do
-    this are in a README.txt file included in the zip archive.\r\n"
+  m_text: "Version 2.2 of Sticky\r\n<u><b><size=1.7em>Changes</size></b></u>\n<size=0.3em>\u200B</size>\r\n<b><size=1.5em>Levels</size></b>\r\n
+    - Made level 5 slightly easier.\r\n - Fixed a few improperly placed objects in
+    level 6.\r\n<b><size=1.5em>New Features</size></b>\r\n - Added in-game stopwatch.\r\n
+    - Added save data menu (accessed through button on main menu).\r\n - Save file
+    now contains the time you started playing (resets if you delete save data).\r\n<b><size=1.5em>Bugfixes</size></b>\r\n
+    - Removed the \"[placeholder]\" option in the dropdown for selecting your player
+    cube color.\r\n - Fixed player cube color setting (idk how long it didn't work,
+    but it works now).\r\n - Fixed painfully slow scrolling in the dropdown for player
+    cube color.\r\n<b><size=1.5em>Other changes</size></b>\r\n - Cleaned up some
+    spaghetti code and wrote even more spaghetti code.\r\n - Changed scripting backend
+    to Mono.\r\n - Moved the reset progress button from the settings menu to the
+    save data menu.\r\n - Added confirmation when deleting save data.\r\n - Changed
+    the \"Feedback\" button on the main menu to \"Report a problem\".\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1423,11 +1423,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.5
+  m_fontSize: 16.15
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 5
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -1459,7 +1459,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -319.56854, y: 7.6879177, z: -196.34387, w: -310.54385}
+  m_margin: {x: -370.4255, y: -31.645094, z: -196.34387, w: -326.42212}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

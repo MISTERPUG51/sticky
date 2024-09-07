@@ -9,10 +9,8 @@ Currently, the game is only available for Windows and Linux, but you can try to 
  - Add ability to change default controls
  - Add level editor and custom level support (maybe)
  - Add support for MacOS
- - Add ability to view release notes in-game
  - Add more levels
  - Add automatic update checker
- - Automatic update installation
  - Add ability to import/export save files
  - Add support for multiple save files.
 
