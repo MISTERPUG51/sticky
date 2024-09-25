@@ -11,12 +11,14 @@ public class SaveHandler : MonoBehaviour
     public int SaveDataVersion;
     public float MusicVolume;
     public string CreatedDate;
+    public bool MainMenuBackgroundVideoEnabled;
     public long Level1Time;
     public long Level2Time;
     public long Level3Time;
     public long Level4Time;
     public long Level5Time;
     public long Level6Time;
+    
 
     // Start is called before the first frame update
     [Serializable]
@@ -27,12 +29,14 @@ public class SaveHandler : MonoBehaviour
         public int UnlockedLevels;
         public float MusicVolume;
         public string CreatedDate;
+        public bool MainMenuBackgroundVideoEnabled;
         public long Level1Time;
         public long Level2Time;
         public long Level3Time;
         public long Level4Time;
         public long Level5Time;
         public long Level6Time;
+
     }
 
     public void UpdateSaveData()
@@ -58,6 +62,12 @@ public class SaveHandler : MonoBehaviour
             Level5Time = 0;
             Level6Time = 0;
         }
+        if (SaveDataVersion < 4)
+        {
+            Debug.Log("Converting save to version 4");
+            SaveDataVersion = 4;
+            MainMenuBackgroundVideoEnabled = true;
+}
         SaveData();
     }
 
@@ -70,6 +80,7 @@ public class SaveHandler : MonoBehaviour
         UnlockedLevels = SaveData.UnlockedLevels;
         MusicVolume = SaveData.MusicVolume;
         CreatedDate = SaveData.CreatedDate;
+        MainMenuBackgroundVideoEnabled = SaveData.MainMenuBackgroundVideoEnabled;
         Level1Time = SaveData.Level1Time;
         Level2Time = SaveData.Level2Time;
         Level3Time = SaveData.Level3Time;
@@ -86,6 +97,7 @@ public class SaveHandler : MonoBehaviour
             UnlockedLevels = UnlockedLevels,
             MusicVolume = MusicVolume,
             CreatedDate = CreatedDate,
+            MainMenuBackgroundVideoEnabled = MainMenuBackgroundVideoEnabled,
             Level1Time = Level1Time,
             Level2Time = Level2Time,
             Level3Time = Level3Time,

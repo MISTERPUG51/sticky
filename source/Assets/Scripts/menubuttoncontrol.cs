@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 using System.Globalization;
 using UnityEngine.UI;
 using System;
-
+using UnityEditor;
+using System.IO;
 
 
 
 public class menubuttoncontrol : MonoBehaviour
 {
+    public GameObject BackgroundVideoPlayer;
     public TMP_Dropdown levelSelectDropdown;
     public GameObject levelSelectWarning;
     public GameObject MainMenuUI;
@@ -32,6 +34,8 @@ public class menubuttoncontrol : MonoBehaviour
 
     public GameObject DeleteDataMenuUI;
 
+
+    public GameObject CustomLevelsMenuUI;
 
 
     //These sprites are the level preview images on the level select screen.
@@ -60,6 +64,10 @@ public class menubuttoncontrol : MonoBehaviour
         }
         SaveHandler.UpdateSaveData();
         SaveHandler.LoadData();
+        if (SaveHandler.MainMenuBackgroundVideoEnabled)
+        {
+            BackgroundVideoPlayer.SetActive(true);
+        }
         Debug.Log(System.DateTime.Now);
     }
     public void LevelSelect()
@@ -95,6 +103,7 @@ public class menubuttoncontrol : MonoBehaviour
     {
         SaveDataMenuUI.SetActive(false);
         LevelSelectUI.SetActive(false);
+        CustomLevelsMenuUI.SetActive(false);
         MainMenuUI.SetActive(true);
     }
 
@@ -262,5 +271,20 @@ public class menubuttoncontrol : MonoBehaviour
         {
             LevelTimeText.text = "Not set";
         }
+    }
+
+
+
+
+
+    public void CustomLevelsMenu()
+    {
+        MainMenuUI.SetActive(false);
+        CustomLevelsMenuUI.SetActive(true);
+    }
+
+    public void LoadCustomLevel()
+    {
+        SceneManager.LoadScene("CustomLevel");
     }
 }

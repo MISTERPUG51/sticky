@@ -12,13 +12,14 @@ public class settings : MonoBehaviour
     public TMP_Dropdown PlayerCubeColorDropdown;
     public Slider MusicVolumeSlider;
     public SaveHandler SaveHandler;
-
+    public Toggle MainMenuBackgroundVideoToggle;
 
     public void Start()
     {
         SaveHandler.LoadData();
         MusicVolumeSlider.value = SaveHandler.MusicVolume;
         PlayerCubeColorDropdown.value = SaveHandler.PlayerColor;
+        MainMenuBackgroundVideoToggle.isOn = SaveHandler.MainMenuBackgroundVideoEnabled;
     }
     public void MainMenu()
     {
@@ -48,5 +49,11 @@ public class settings : MonoBehaviour
     public void ChangeMusicVolume()
     {
         SaveHandler.MusicVolume = MusicVolumeSlider.value;
+    }
+
+    public void MainMenuBackgroundVideoToggleChanged()
+    {
+
+        SaveHandler.MainMenuBackgroundVideoEnabled = MainMenuBackgroundVideoToggle.isOn;
     }
 }

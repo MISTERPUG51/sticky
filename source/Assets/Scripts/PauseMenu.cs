@@ -21,6 +21,10 @@ public class PauseMenu : MonoBehaviour
     {
         //Ensures that the stopwatch is at 0.
         GameStopwatch.Restart();
+        if (SceneManager.GetActiveScene().name == "CustomLevel")
+        {
+            GameStopwatch.Stop();
+        }
     }
     void Update()
     {

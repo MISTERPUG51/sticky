@@ -21,6 +21,8 @@ public class UpdateChecker : MonoBehaviour
     public string NewestVersion;
     public GameObject DownloadButton;
     public GameObject QuitButton;
+    public GameObject MainMenuButton;
+    public GameObject InstallButton;
     public MarkdownRenderer MarkdownRenderer;
 
     [Serializable]
@@ -91,25 +93,14 @@ public class UpdateChecker : MonoBehaviour
 
     public void DownloadAndInstallUpdate()
     {
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        Debug.Log("Application.dataPath is " + Application.dataPath);
+        Debug.Log(System.IO.Directory.GetParent(Application.dataPath));
+        if (System.IO.Directory.GetParent(Application.dataPath).ToString() == "C:\\Program Files\\Sticky")
         {
-            Debug.Log("Application.dataPath is " + Application.dataPath);
-            Debug.Log(System.IO.Directory.GetParent(Application.dataPath));
-            if (System.IO.Directory.GetParent(Application.dataPath).ToString() == "C:\\Program Files\\Sticky")
-            {
-                MarkdownRenderer.Source = "Downloading installer.";
-                Debug.Log("Program is installed.");
-                Debug.Log("Temp path: " + Path.GetTempPath());
-                StartCoroutine(urlDownload());
-            }
-            else
-            {
-                MarkdownRenderer.Source = "You are running the portable version of Sticky. You can only automatically install updates if you have Sticky installed on your computer.";
-            }
-        }
-        else
-        {
-            MarkdownRenderer.Source = "You are running the portable version of Sticky. You can only automatically install updates if you have Sticky installed on your computer.";
+            MarkdownRenderer.Source = "Downloading installer.";
+            Debug.Log("Program is installed.");
+            Debug.Log("Temp path: " + Path.GetTempPath());
+            StartCoroutine(urlDownload());
         }
         
     }
@@ -123,7 +114,6 @@ public class UpdateChecker : MonoBehaviour
 
     IEnumerator urlDownload()
     {
-        //https://github.com/MISTERPUG51/sticky/raw/main/updater/stickyupdater.exe
         UnityWebRequest updaterWebRequest = UnityWebRequest.Get("https://github.com/MISTERPUG51/sticky/raw/main/updater/stickyupdater.exe");
         yield return updaterWebRequest.SendWebRequest();
 
@@ -149,6 +139,10 @@ public class UpdateChecker : MonoBehaviour
     {
         DownloadButton.SetActive(true);
         QuitButton.SetActive(true);
+        if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            InstallButton.SetActive(true);
+        }
     }
 
     public void OpenDownloadPage()
