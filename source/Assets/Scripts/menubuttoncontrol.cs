@@ -13,7 +13,6 @@ using System.IO;
 
 public class menubuttoncontrol : MonoBehaviour
 {
-    public GameObject BackgroundVideoPlayer;
     public TMP_Dropdown levelSelectDropdown;
     public GameObject levelSelectWarning;
     public GameObject MainMenuUI;
@@ -53,6 +52,11 @@ public class menubuttoncontrol : MonoBehaviour
 
     public void Start()
     {
+        if (System.IO.File.Exists(Application.persistentDataPath + "/updater.exe"))
+        {
+            Debug.Log("Deleting temporary updater file.");
+            System.IO.File.Delete(Application.persistentDataPath + "/updater.exe");
+        }
         Debug.Log(Application.persistentDataPath);
         Debug.Log(Application.persistentDataPath + "/save.json");
 
@@ -64,10 +68,6 @@ public class menubuttoncontrol : MonoBehaviour
         }
         SaveHandler.UpdateSaveData();
         SaveHandler.LoadData();
-        if (SaveHandler.MainMenuBackgroundVideoEnabled)
-        {
-            BackgroundVideoPlayer.SetActive(true);
-        }
         Debug.Log(System.DateTime.Now);
     }
     public void LevelSelect()

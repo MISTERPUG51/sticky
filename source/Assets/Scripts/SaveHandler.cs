@@ -11,7 +11,6 @@ public class SaveHandler : MonoBehaviour
     public int SaveDataVersion;
     public float MusicVolume;
     public string CreatedDate;
-    public bool MainMenuBackgroundVideoEnabled;
     public long Level1Time;
     public long Level2Time;
     public long Level3Time;
@@ -29,7 +28,6 @@ public class SaveHandler : MonoBehaviour
         public int UnlockedLevels;
         public float MusicVolume;
         public string CreatedDate;
-        public bool MainMenuBackgroundVideoEnabled;
         public long Level1Time;
         public long Level2Time;
         public long Level3Time;
@@ -66,8 +64,12 @@ public class SaveHandler : MonoBehaviour
         {
             Debug.Log("Converting save to version 4");
             SaveDataVersion = 4;
-            MainMenuBackgroundVideoEnabled = true;
-}
+        }
+        if (SaveDataVersion < 5)
+        {
+            Debug.Log("Converting save to version 5");
+            SaveDataVersion = 5;
+        }
         SaveData();
     }
 
@@ -80,7 +82,6 @@ public class SaveHandler : MonoBehaviour
         UnlockedLevels = SaveData.UnlockedLevels;
         MusicVolume = SaveData.MusicVolume;
         CreatedDate = SaveData.CreatedDate;
-        MainMenuBackgroundVideoEnabled = SaveData.MainMenuBackgroundVideoEnabled;
         Level1Time = SaveData.Level1Time;
         Level2Time = SaveData.Level2Time;
         Level3Time = SaveData.Level3Time;
@@ -97,7 +98,6 @@ public class SaveHandler : MonoBehaviour
             UnlockedLevels = UnlockedLevels,
             MusicVolume = MusicVolume,
             CreatedDate = CreatedDate,
-            MainMenuBackgroundVideoEnabled = MainMenuBackgroundVideoEnabled,
             Level1Time = Level1Time,
             Level2Time = Level2Time,
             Level3Time = Level3Time,

@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: f81e03b545f8cfd46ac00d22c30877ea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Update.unity
     guid: 1c7c67a4534d44447ad3cb788a070070
   - enabled: 1
@@ -39,3 +39,4 @@ EditorBuildSettings:
     path: Assets/Scenes/CustomLevel.unity
     guid: 2abf1803ae2eaec448de8f84ea8f28fc
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

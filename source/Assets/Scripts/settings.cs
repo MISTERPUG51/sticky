@@ -1,10 +1,13 @@
+//using Microsoft.Unity.VisualStudio.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Enumeration;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Diagnostics;
 
 public class settings : MonoBehaviour
 {
@@ -12,14 +15,13 @@ public class settings : MonoBehaviour
     public TMP_Dropdown PlayerCubeColorDropdown;
     public Slider MusicVolumeSlider;
     public SaveHandler SaveHandler;
-    public Toggle MainMenuBackgroundVideoToggle;
+    public TMP_Text TitleText;
 
     public void Start()
     {
         SaveHandler.LoadData();
         MusicVolumeSlider.value = SaveHandler.MusicVolume;
         PlayerCubeColorDropdown.value = SaveHandler.PlayerColor;
-        MainMenuBackgroundVideoToggle.isOn = SaveHandler.MainMenuBackgroundVideoEnabled;
     }
     public void MainMenu()
     {
@@ -29,7 +31,12 @@ public class settings : MonoBehaviour
 
     public void CheckUpdate()
     {
-        SceneManager.LoadScene("Update");
+        string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+        UnityEngine.Debug.Log(baseDir);
+        TitleText.text = baseDir;
+        System.IO.File.Copy(baseDir + "/updater.exe", Application.persistentDataPath + "/updater.exe");
+        System.Diagnostics.Process.Start(Application.persistentDataPath + "/updater.exe");
+        Application.Quit();
     }
 
     public void ResetSettings()
@@ -43,17 +50,11 @@ public class settings : MonoBehaviour
     public void PlayerCubeColorChanged()
     {
         SaveHandler.PlayerColor = PlayerCubeColorDropdown.value;
-        Debug.Log("color=" + PlayerPrefs.GetInt("PlayerColor"));
+        UnityEngine.Debug.Log("color=" + PlayerPrefs.GetInt("PlayerColor"));
     }
 
     public void ChangeMusicVolume()
     {
         SaveHandler.MusicVolume = MusicVolumeSlider.value;
-    }
-
-    public void MainMenuBackgroundVideoToggleChanged()
-    {
-
-        SaveHandler.MainMenuBackgroundVideoEnabled = MainMenuBackgroundVideoToggle.isOn;
     }
 }
