@@ -16,6 +16,7 @@ public class settings : MonoBehaviour
     public Slider MusicVolumeSlider;
     public SaveHandler SaveHandler;
     public TMP_Text TitleText;
+    public TMP_Text UpdateIncompatibilityText;
 
     public void Start()
     {
@@ -32,11 +33,19 @@ public class settings : MonoBehaviour
     public void CheckUpdate()
     {
         string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
-        UnityEngine.Debug.Log(baseDir);
-        TitleText.text = baseDir;
-        System.IO.File.Copy(baseDir + "/updater.exe", Application.persistentDataPath + "/updater.exe");
-        System.Diagnostics.Process.Start(Application.persistentDataPath + "/updater.exe");
-        Application.Quit();
+        if (System.IO.File.Exists(baseDir + "/updater.exe"))
+        {
+            UnityEngine.Debug.Log(baseDir);
+            System.IO.File.Copy(baseDir + "/updater.exe", Application.persistentDataPath + "/updater.exe");
+            System.Diagnostics.Process.Start(Application.persistentDataPath + "/updater.exe");
+            Application.Quit();
+        }
+        else
+        {
+            TitleText.enabled = false;
+            UpdateIncompatibilityText.enabled = true;
+        }
+        
     }
 
     public void ResetSettings()
