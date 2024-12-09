@@ -17,7 +17,12 @@ public class SaveHandler : MonoBehaviour
     public long Level4Time;
     public long Level5Time;
     public long Level6Time;
-    
+
+    public string MoveForwardKey;
+    public string MoveBackwardKey;
+    public string MoveLeftKey;
+    public string MoveRightKey;
+    public string PauseKey;
 
     // Start is called before the first frame update
     [Serializable]
@@ -35,6 +40,12 @@ public class SaveHandler : MonoBehaviour
         public long Level5Time;
         public long Level6Time;
 
+        public string MoveForwardKey;
+        public string MoveBackwardKey;
+        public string MoveLeftKey;
+        public string MoveRightKey;
+        public string PauseKey;
+
     }
 
     public void UpdateSaveData()
@@ -50,7 +61,8 @@ public class SaveHandler : MonoBehaviour
         }
         if (SaveDataVersion < 3)
         {
-            Debug.Log("Converting save to version 3");
+            //Added in-game stopwatch.
+            Debug.Log("Converting save to version 3 (Release 2.2)");
             SaveDataVersion = 3;
             CreatedDate = System.DateTime.Now.ToString();
             Level1Time = 0;
@@ -62,13 +74,27 @@ public class SaveHandler : MonoBehaviour
         }
         if (SaveDataVersion < 4)
         {
-            Debug.Log("Converting save to version 4");
+            Debug.Log("Converting save to version 4 (Release 2.3)");
+            //Save data format 4 added the option to disable the background video on the main menu.
+            //The background video was removed in Release 2.3.1, so the code that sets that setting is no longer here.
             SaveDataVersion = 4;
         }
         if (SaveDataVersion < 5)
         {
-            Debug.Log("Converting save to version 5");
+            //Removed title screen background video and the setting to toggle it.
+            Debug.Log("Converting save to version 5 (Release 2.3.1)");
             SaveDataVersion = 5;
+        }
+        if (SaveDataVersion < 6)
+        {
+            //Added custom control settings.
+            Debug.Log("Converting save to verion 6 (Release 2.4)");
+            SaveDataVersion = 6;
+            MoveForwardKey = "w";
+            MoveBackwardKey = "s";
+            MoveLeftKey = "a";
+            MoveRightKey = "d";
+            PauseKey = "Escape";
         }
         SaveData();
     }
@@ -88,6 +114,12 @@ public class SaveHandler : MonoBehaviour
         Level4Time = SaveData.Level4Time;
         Level5Time = SaveData.Level5Time;
         Level6Time = SaveData.Level6Time;
+
+        MoveForwardKey = SaveData.MoveForwardKey;
+        MoveBackwardKey = SaveData.MoveBackwardKey;
+        MoveLeftKey = SaveData.MoveLeftKey;
+        MoveRightKey = SaveData.MoveRightKey;
+        PauseKey = SaveData.PauseKey;
     }
     public void SaveData()
     {
@@ -104,6 +136,12 @@ public class SaveHandler : MonoBehaviour
             Level4Time = Level4Time,
             Level5Time = Level5Time,
             Level6Time = Level6Time,
+
+            MoveForwardKey = MoveForwardKey,
+            MoveBackwardKey = MoveBackwardKey,
+            MoveLeftKey = MoveLeftKey,
+            MoveRightKey = MoveRightKey,
+            PauseKey = PauseKey
         };
         string json = JsonUtility.ToJson(SaveData);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/save.json", json);

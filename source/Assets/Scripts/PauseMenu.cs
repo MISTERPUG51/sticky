@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         //If the escape key is pressed, pause the game.
-        if (Input.GetKey("escape"))
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.PauseKey)))
         {
             PauseGame();
         }

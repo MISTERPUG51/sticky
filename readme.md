@@ -6,7 +6,6 @@ Currently, the game is only available for Windows and Linux, but you can try to 
 
 # Planned updates/features
 
- - Add ability to change default controls
  - Add support for MacOS
  - Add more levels
  - Add automatic update checker

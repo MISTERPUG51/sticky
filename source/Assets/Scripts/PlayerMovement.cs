@@ -33,8 +33,11 @@ public class PlayerMovement : MonoBehaviour
     public SaveHandler SaveHandler;
 
 
-    
 
+    public KeyCode MoveForwardKey;
+    public KeyCode MoveBackwardKey;
+    public KeyCode MoveLeftKey;
+    public KeyCode MoveRightKey;
 
 
 
@@ -42,7 +45,16 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         SaveHandler.LoadData();
+        MoveForwardKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveForwardKey);
+        MoveBackwardKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveBackwardKey);
+        MoveLeftKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveLeftKey);
+        MoveRightKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveRightKey);
+
+        //I have no idea why I put this here. It's probably a holdover from when I uses PlayerPrefs for save data.
         PlayerPrefs.Save();
+
+
+
         if (LevelNumber > SaveHandler.UnlockedLevels)
         {
             Debug.Log("unlocked new level");
@@ -99,22 +111,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (MovementEnabled)
         {
-            if (Input.GetKey("d"))
+            if (Input.GetKey(MoveRightKey))
             {
                 rb.AddForce(force * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
             }
 
-            if (Input.GetKey("a"))
+            if (Input.GetKey(MoveLeftKey))
             {
                 rb.AddForce(-force * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
             }
 
-            if (Input.GetKey("s"))
+            if (Input.GetKey(MoveBackwardKey))
             {
                 rb.AddForce(0, 0, -force * Time.deltaTime, ForceMode.VelocityChange);
             }
 
-            if (Input.GetKey("w"))
+            if (Input.GetKey(MoveForwardKey))
             {
                 rb.AddForce(0, 0, force * Time.deltaTime, ForceMode.VelocityChange);
             }
