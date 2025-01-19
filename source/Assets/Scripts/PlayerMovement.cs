@@ -45,10 +45,10 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         SaveHandler.LoadData();
-        MoveForwardKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveForwardKey);
-        MoveBackwardKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveBackwardKey);
-        MoveLeftKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveLeftKey);
-        MoveRightKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveRightKey);
+        MoveForwardKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveForwardKey, true);
+        MoveBackwardKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveBackwardKey, true);
+        MoveLeftKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveLeftKey, true);
+        MoveRightKey = (KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveRightKey, true);
 
         //I have no idea why I put this here. It's probably a holdover from when I uses PlayerPrefs for save data.
         PlayerPrefs.Save();

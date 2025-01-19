@@ -32,7 +32,7 @@ public class settings : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveForwardKey)))
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), SaveHandler.MoveForwardKey, true)))
         {
             UnityEngine.Debug.Log("Forward key pressed");
         }
@@ -147,7 +147,6 @@ public class settings : MonoBehaviour
         ForwardKeyText.text = "Waiting for input.";
         KeybindBeingChanged = "moveForward";
         waitingForInput = true;
-        
     }
 
     public void ChangeBackwardKey()
@@ -155,7 +154,6 @@ public class settings : MonoBehaviour
         BackwardKeyText.text = "Waiting for input.";
         KeybindBeingChanged = "moveBackward";
         waitingForInput = true;
-
     }
 
     public void ChangeLeftKey()
@@ -163,7 +161,6 @@ public class settings : MonoBehaviour
         LeftKeyText.text = "Waiting for input.";
         KeybindBeingChanged = "moveLeft";
         waitingForInput = true;
-
     }
 
     public void ChangeRightKey()
@@ -171,7 +168,6 @@ public class settings : MonoBehaviour
         RightKeyText.text = "Waiting for input.";
         KeybindBeingChanged = "moveRight";
         waitingForInput = true;
-
     }
 
     public void ChangePauseKey()
@@ -179,7 +175,6 @@ public class settings : MonoBehaviour
         PauseKeyText.text = "Waiting for input.";
         KeybindBeingChanged = "pause";
         waitingForInput = true;
-
     }
 
 
